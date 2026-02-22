@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revisi Logbook Internship Dokter Indonesia</title>
+  <style>
+    :root { --teal:#13b5ac; --bg:#f4f6f8; --text:#1f2937; --muted:#6b7280; --card:#fff; }
+    body { font-family: Inter, system-ui, sans-serif; margin:0; background:var(--bg); color:var(--text); }
+    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background:var(--card); border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,.08); padding:18px; margin-bottom:16px; }
+    h1,h2,h3{margin:.2rem 0 .8rem} h1{font-size:1.5rem} h2{font-size:1.2rem} h3{font-size:1rem}
+    .grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .kpi{padding:14px;border:1px solid #e5e7eb;border-radius:12px}.kpi b{font-size:1.3rem;color:var(--teal)}
+    label{display:block;font-size:.85rem;font-weight:600;margin-bottom:6px}
+    input,select{width:100%;padding:10px 12px;border:1px solid #d1d5db;border-radius:9px;font-size:.95rem}
+    .small{font-size:.84rem;color:var(--muted)}
+    .pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#ecfeff;color:#0f766e;font-size:.8rem}
+    table{width:100%;border-collapse:collapse;font-size:.9rem} th,td{padding:8px;border-bottom:1px solid #e5e7eb;text-align:left}
+    .ok{color:#059669}.warn{color:#dc2626}
+    @media (max-width:900px){.g2,.g3{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Revisi Website Logbook Internship Dokter Indonesia</h1>
+    <div class="card small">Versi ini mengimplementasikan requirement baru UKP, Tindakan Medis (TM), dan Laporan Kasus berikut analytics target.</div>
+
+    <div class="card">
+      <h2>Dashboard Target Utama</h2>
+      <div class="grid g3">
+        <div class="kpi"><div>Total UKP Wajib</div><b>400 kasus</b><div class="small">RS minimal 300 • Puskesmas minimal 100</div></div>
+        <div class="kpi"><div>Distribusi Gender</div><b>50% : 50%</b><div class="small">Laki-laki : Perempuan</div></div>
+        <div class="kpi"><div>Sumber Data Valid</div><b>3 sumber</b><div class="small">Rawat inap, rawat darurat, rawat jalan</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Form UKP (Revisi)</h2>
+      <div class="grid g2">
+        <div><label>Nomor Kasus (otomatis)</label><input id="caseNo" value="UKP-2026-0001" readonly></div>
+        <div><label>No. Rekam Medis</label><input placeholder="Masukkan no RM"></div>
+        <div><label>Tanggal Lahir Pasien (DOB)</label><input id="dob" type="date"></div>
+        <div><label>Kelompok Usia (otomatis dari DOB)</label><input id="ageGroup" readonly placeholder="Anak / Dewasa / Lansia"></div>
+        <div><label>Jenis UKP</label><select>
+          <option>Medik rawat jalan</option><option>Bedah</option><option>Kegawatan</option><option>Kebidanan-perinatal</option><option>Kejiwaan</option><option>Medikolegal</option>
+        </select></div>
+        <div><label>Sumber data</label><select><option>Rawat inap</option><option>Rawat darurat</option><option>Rawat jalan</option></select></div>
+        <div><label>Diagnosis / masalah (cari ICD-10)</label><input placeholder="Contoh: A09, E11.9, J18.9"></div>
+        <div><label>Kategori kasus</label><input value="Dihapus (khusus COVID, sudah tidak applicable)" readonly></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>TM (Tindakan Medis) Terhubung ke UKP</h2>
+      <div class="grid g2">
+        <div><label>Referensi UKP</label><input placeholder="Pilih Nomor Kasus UKP, contoh UKP-2026-0001"></div>
+        <div><label>Nomor Kasus TM</label><input value="TM-2026-0001" readonly></div>
+      </div>
+      <table>
+        <thead><tr><th>Jenis TM</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Pasang infus</td><td>50</td></tr>
+          <tr><td>Pasang NGT</td><td>2</td></tr>
+          <tr><td>Persalinan</td><td>2</td></tr>
+          <tr><td>Bedah minor</td><td>10</td></tr>
+          <tr><td>Pasang kateter</td><td>5</td></tr>
+          <tr><td>Jahit</td><td>15</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Analytics Target UKP</h2>
+      <table>
+        <thead><tr><th>Parameter</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td>Kasus Anak</td><td>25–40% dari total kasus</td></tr>
+          <tr><td>Kasus Dewasa</td><td>40–60% dari total kasus</td></tr>
+          <tr><td>Kasus Lansia</td><td>15–25% dari total kasus</td></tr>
+          <tr><td>Bedah</td><td>Minimal 20% dari 400</td></tr>
+          <tr><td>Kegawatan</td><td>Minimal 20% dari 400</td></tr>
+          <tr><td>Kebidanan-perinatal</td><td>Minimal 10% dari 400</td></tr>
+          <tr><td>Kejiwaan & Medikolegal</td><td>Minimal 0% (boleh tidak ada)</td></tr>
+          <tr><td>Medik rawat jalan</td><td>Sisa kuota (tanpa min/max)</td></tr>
+        </tbody>
+      </table>
+      <p class="small">Contoh status validasi: <span class="pill ok">Bedah: 82/80 ✔</span> <span class="pill warn">Puskesmas: 72/100 ✖</span></p>
+    </div>
+  </div>
+
+<script>
+  const dob = document.getElementById('dob');
+  const ageGroup = document.getElementById('ageGroup');
+  function resolveAgeGroup(value){
+    if(!value){ ageGroup.value=''; return; }
+    const now = new Date();
+    const born = new Date(value);
+    let age = now.getFullYear() - born.getFullYear();
+    const m = now.getMonth()-born.getMonth();
+    if(m < 0 || (m===0 && now.getDate()<born.getDate())) age--;
+    ageGroup.value = age < 18 ? 'Anak' : age < 60 ? 'Dewasa' : 'Lansia';
+  }
+  dob.addEventListener('change', e => resolveAgeGroup(e.target.value));
+</script>
+</body>
+</html>
